@@ -1,0 +1,41 @@
+                                {quizData.components.map((component) => (
+                                    <div key={component} className="relative mb-4">
+                                        {component === 'progress-bar' && (
+                                            <div className="w-full h-2 bg-green-500 rounded"></div>
+                                        )}
+                                        {component === 'question-number' && (
+                                            <span className="block text-sm font-bold text-center">01/10</span>
+                                        )}
+                                        {component === 'timer' && (
+                                            <span className="block text-sm font-bold text-center bg-gray-200 px-2 py-1 rounded">00:00</span>
+                                        )}
+                                        {component === 'question-text' && (
+                                            <p className="text-lg font-semibold">{quizData.questionText}</p>
+                                        )}
+                                        {component === 'image' && (
+                                            <img src={quizData.image || '/placeholder.jpg'} alt="Uploaded" className="w-full h-40 object-cover rounded" />
+                                        )}
+                                        {component === 'options' && (
+                                            <div className="space-y-2">
+                                                {quizData.options.map((option, index) => (
+                                                    <div key={index} className="p-2 bg-gray-200 rounded-md">
+                                                        <span>{option || `Option ${index + 1}`}</span>
+                                                        <input
+                                                            type="radio"
+                                                            name="correct-option"
+                                                            className="ml-2"
+                                                            checked={quizData.correctOption === index}
+                                                            onChange={() => setCorrectOption(index)}
+                                                        />
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                        <span
+                                            className="absolute top-2 right-2 text-red-500 cursor-pointer"
+                                            onClick={() => deleteComponent(component)}
+                                        >
+                                            &times;
+                                        </span>
+                                    </div>
+                                ))}
